@@ -52,6 +52,8 @@ graph TD
 - `gpg` ([apt](https://packages.ubuntu.com/questing/gnupg2), [dnf](https://packages.fedoraproject.org/pkgs/gnupg2/gnupg2/))
 - `ssss` ([apt](https://packages.ubuntu.com/questing/ssss), [dnf](https://packages.fedoraproject.org/pkgs/ssss/ssss/))
 
+A _vibe-coded_ script that automates the process is available as `bruta-fin.sh`.
+
 ### Usage: Setup
 
 > [!TIP]
