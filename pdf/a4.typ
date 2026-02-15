@@ -16,8 +16,11 @@
 // fill with instructions/link
 #let instructions = "https://github.com/Favo02/bruta-fin"
 
+#set page(paper: "a4", margin: 1cm)
+#set text(size: 18pt)
+
 #let linebreaks(body) = {
-  let chunks = range(0, body.len(), step: 80).map(i => body.slice(i, calc.min(i + 80, body.len())))
+  let chunks = range(0, body.len(), step: 60).map(i => body.slice(i, calc.min(i + 60, body.len())))
   chunks.join("\n")
 }
 
@@ -30,11 +33,7 @@
 
   #datetime.today().display() -- #instructions
 
-  ---
-
   #raw(linebreaks(file))
-
-  ---
 
   #raw(linebreaks(shard))
 ]
