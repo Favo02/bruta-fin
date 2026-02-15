@@ -39,7 +39,7 @@ graph TD
     Split --> P4
     Split --> P5
 
-    P1 & P3 & P5 -.-> |Any 3 people provide shard| Combine
+    P1 & P3 & P4 & P5 -.-> |Any 4 people provide shard| Combine
     Combine[Combine shards using **SSS**] --> RecoveredKey[Recover encryption key]
 
     P1 -.-> |Anyone provide file| Unlock[Unlock file]
@@ -64,10 +64,10 @@ graph TD
    gpg --symmetric --cipher-algo AES256 --output encrypted.gpg legacy.txt
    ```
 
-2. Split the passphrase into 5 shards using [Shamir's Secret Sharing](https://en.wikipedia.org/wiki/Shamir's_secret_sharing), requiring any 3 to reconstruct:
+2. Split the passphrase into 5 shards using [Shamir's Secret Sharing](https://en.wikipedia.org/wiki/Shamir's_secret_sharing), requiring any 4 to reconstruct:
 
    ```bash
-   ssss-split -t 3 -n 5
+   ssss-split -t 4 -n 5
    ```
 
 3. Distribute the encrypted file and shards (including the shard index) to 5 trusted people.
@@ -89,16 +89,20 @@ graph TD
 > [!CAUTION]
 > This should ideally _never_ happen, but make sure it works, _test_ it!
 
+> [!WARNING]
+> To reconstruct the secret, 4 _different_ shards are needed.
+> I distributed the same shard to multiple people, make sure to collect 4 _unique_ shards.
+
 1. If encoded in base64, decode the file:
 
    ```bash
    base64 -d encrypted.gpg.base64 > encrypted.gpg
    ```
 
-2. Reconstruct the key from 3 shards (include the shard index, do not put linebreaks):
+2. Reconstruct the key from 4 shards (include the shard index, do not put linebreaks):
 
    ```bash
-   ssss-combine -t 3
+   ssss-combine -t 4
    ```
 
 3. Decrypt the file:
